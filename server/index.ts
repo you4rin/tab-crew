@@ -15,11 +15,26 @@ app.get('/', function(req, res) {
   res.send('hello world');
 });
 
+app.get("/user/:id", asyncHandler(async (req, res) => {
+  console.log(req.query);
+  const data = await prisma.user.findUnique({
+    where: {
+      id: +req.params.id
+    },
+    select: {
+      id:true,
+      email: true,
+      name: true
+    }
+  })
+  res.send(data);
+}))
+
 app.post("/add", asyncHandler(async (req, res) => {
   const data = await prisma.user.create({
     data: {
       email: "you4rin@naver.com",
-      name:"바보"
+      name:"아티초크"
     }
   })
   console.log(data);

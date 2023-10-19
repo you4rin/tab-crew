@@ -20,7 +20,11 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 })
 
 // respond with "hello world" when a GET request is made to the homepage
-app.get('/', function(req, res) {
+app.get('/', function (req, res) {
+  shuffle_cards();
+  for (const card of cards) {
+    console.log(card);
+  }
   res.send('hello world');
 });
 
